@@ -34,6 +34,16 @@
             <!-- card de tarefa que repete para cada item do array -->
             <div v-for="tarefa in tasks" class="card horizontal">
               <div class="card-stacked">
+                <div class="simbolos">
+                  <i
+                    class="fa-solid fa-pen-to-square editar"
+                    @click="editar(tarefa.id)"
+                  ></i>
+                  <i
+                    class="fa-solid fa-trash lixo"
+                    @click="deletar(tarefa.id)"
+                  ></i>
+                </div>
                 <div class="card-content">
                   <p>{{ tarefa.title }}</p>
                   <span class="projeto">{{ tarefa.project }}</span>
@@ -65,6 +75,7 @@
                   type="text"
                   class="validate"
                   required
+                  v-model="titulo"
                 />
                 <label for="title">Title</label>
               </div>
@@ -72,7 +83,7 @@
                 <div>
                   <label for="project">&nbsp &nbsp Pick a Project</label>
                 </div>
-                <select style="display: block" id="project">
+                <select style="display: block" id="project" v-model="projeto">
                   <option value="" disabled selected>Choose your option</option>
                   <option value="Estudos">Estudos</option>
                   <option value="Financeiro">Financeiro</option>
@@ -80,13 +91,18 @@
                 </select>
               </div>
               <div class="input-field col s12">
-                <input type="date" class="datepicker" id="dueTo" />
+                <input
+                  type="date"
+                  class="datepicker"
+                  id="dueTo"
+                  v-model="dataDia"
+                />
                 <label for="dueTo">Date due to</label>
               </div>
             </form>
             <!-- <input type="text" /> -->
             <div class="botoes">
-              <button class="adicionar">Adicionar</button>
+              <button class="adicionar" @click="addTasks">Adicionar</button>
               <button
                 class="cancelar"
                 onclick="document.querySelector('.modalNovaTask').style.display = 'none'"
