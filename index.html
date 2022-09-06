@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>ToDo</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Materialize CSS CDN -->
     <link
@@ -33,11 +33,91 @@
           <div class="row">
             <!-- card de tarefa que repete para cada item do array -->
             <div v-for="tarefa in tasks" class="card horizontal">
+              <div class="modalNovaTask">
+                <div class="conteudo">
+                  <span
+                    class="close"
+                    onclick="document.querySelector('.modalNovaTask').style.display = 'none'"
+                    @click="editarTarefa = false, titulo = null
+                    projeto = null
+                    dataDia = null"
+                    >&times;</span
+                  >
+                  <div class="newTask">
+                    <h4 v-if="editarTarefa">Editar Tarefa</h4>
+                    <h4 v-else>Nova Tarefa</h4>
+                    <form action="">
+                      <div class="input-field col s12">
+                        <input
+                          placeholder="Title"
+                          id="title"
+                          type="text"
+                          class="validate"
+                          required
+                          v-model="titulo"
+                        />
+                        <!-- <label for="title">Title</label> -->
+                      </div>
+                      <div class="input-field col s12">
+                        <div>
+                          <label for="project"
+                            >&nbsp &nbsp Pick a Project</label
+                          >
+                        </div>
+                        <select
+                          style="display: block"
+                          id="project"
+                          v-model="projeto"
+                        >
+                          <option value="" disabled selected>
+                            Choose your option
+                          </option>
+                          <option value="Estudos">Estudos</option>
+                          <option value="Financeiro">Financeiro</option>
+                          <option value="Trabalho">Trabalho</option>
+                        </select>
+                      </div>
+                      <div class="input-field col s12">
+                        <input
+                          type="date"
+                          class="datepicker"
+                          id="dueTo"
+                          v-model="dataDia"
+                        />
+                        <label for="dueTo">Date due to</label>
+                      </div>
+                    </form>
+                    <!-- <input type="text" /> -->
+                    <div class="botoes">
+                      <button
+                        v-if="editarTarefa"
+                        class="adicionar"
+                        @click="editar()"
+                      >
+                        Editar
+                      </button>
+                      <button v-else class="adicionar" @click="addTasks">
+                        Adicionar
+                      </button>
+                      <button
+                        class="cancelar"
+                        onclick="document.querySelector('.modalNovaTask').style.display = 'none'"
+                        @click="editarTarefa = false, titulo = null
+                        projeto = null
+                        dataDia = null"
+                      >
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="card-stacked">
                 <div class="simbolos">
                   <i
                     class="fa-solid fa-pen-to-square editar"
-                    @click="editar(tarefa.id)"
+                    @click="edit(tarefa.id, tarefa.title, tarefa.project, tarefa.dueTo), editarTarefa = true"
+                    onclick="document.querySelector('.modalNovaTask').style.display = 'flex'"
                   ></i>
                   <i
                     class="fa-solid fa-trash lixo"
@@ -62,57 +142,7 @@
           ></a>
         </div>
       </div>
-      <div class="modalNovaTask">
-        <div class="conteudo">
-          <span class="close">&times;</span>
-          <div class="newTask">
-            <h4>Nova Tarefa</h4>
-            <form action="">
-              <div class="input-field col s12">
-                <input
-                  placeholder="Title"
-                  id="title"
-                  type="text"
-                  class="validate"
-                  required
-                  v-model="titulo"
-                />
-                <label for="title">Title</label>
-              </div>
-              <div class="input-field col s12">
-                <div>
-                  <label for="project">&nbsp &nbsp Pick a Project</label>
-                </div>
-                <select style="display: block" id="project" v-model="projeto">
-                  <option value="" disabled selected>Choose your option</option>
-                  <option value="Estudos">Estudos</option>
-                  <option value="Financeiro">Financeiro</option>
-                  <option value="Trabalho">Trabalho</option>
-                </select>
-              </div>
-              <div class="input-field col s12">
-                <input
-                  type="date"
-                  class="datepicker"
-                  id="dueTo"
-                  v-model="dataDia"
-                />
-                <label for="dueTo">Date due to</label>
-              </div>
-            </form>
-            <!-- <input type="text" /> -->
-            <div class="botoes">
-              <button class="adicionar" @click="addTasks">Adicionar</button>
-              <button
-                class="cancelar"
-                onclick="document.querySelector('.modalNovaTask').style.display = 'none'"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       ​
       <footer class="page-footer light-purple darken-3">
         <div class="footer-copyright">

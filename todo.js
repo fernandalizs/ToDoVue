@@ -6,6 +6,8 @@ var app = new Vue({
         titulo: null,
         dataDia: null,
         projeto: null,
+        editarTarefa: false,
+        id: null,
     },
     methods: {
         getTasks() {
@@ -38,13 +40,24 @@ var app = new Vue({
             const recieve = await deletaTask.json()
             console.log(recieve)
         },
-        // editar(id) {
-        //     const editaTask = await fetch(`http://localhost:3000/tasks/${id}`, {
-        //         method: 'PATCH',
-        //     })
-        //     const recieve = await editaTask.json()
-        //     console.log(recieve)
-        // },
+        async editar() {
+            const editaTask = await fetch(`http://localhost:3000/tasks/${this.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': "application/json" },
+                body: JSON.stringify({ title: this.titulo, project: this.projeto, dueTo: this.dataDia })
+            })
+            this.editarTarefa = false
+
+            const recieve = await editaTask.json()
+            console.log(recieve)
+        }
+        ,
+        edit(id, title, project, dueTo) {
+            this.id = id
+            this.titulo = title
+            this.projeto = project
+            this.dataDia = dueTo
+        },
     },
     created() {
         this.getTasks();
