@@ -8,17 +8,16 @@
       "usuario": "joao@example.com"
     },
     {
-      "id": 2,
-      "title": "Estudar",
-      "dueTo": "2022-05-01T12:00:00.000Z",
-      "project": "Trabalho",
-      "usuario": "joao@example.com"
-    },
-    {
       "title": "Estudar Vuetify",
-      "project": "Estudos",
+      "project": "Trabalho",
       "dueTo": "2022-05-01T12:00:00.000Z",
       "id": 4
+    },
+    {
+      "title": "Tarefa nova",
+      "project": "Estudos",
+      "dueTo": null,
+      "id": 5
     }
   ]
 }

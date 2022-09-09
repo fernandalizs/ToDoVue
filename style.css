@@ -98,3 +98,52 @@ body {
   height: 28px;
   margin-left: 6px;
 }
+
+.vue-toast {
+  margin: 28px 16px;
+  position: fixed;
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 8px;
+  white-space: nowrap;
+  color: #fff;
+  background-color: #000;
+  animation: toast-move-in-top cubic-bezier(0.22, 0.58, 0.12, 0.98) 0.8s;
+  z-index: 10000;
+}
+
+.vue-toast.success {
+  background-color: #47d279;
+  box-shadow: 0 0.2em 0.3em 0.3em rgba(71, 210, 121, 0.4);
+}
+
+.vue-toast.error {
+  background-color: #ff6464;
+  box-shadow: 0 0.2em 1em 0.1em rgba(255, 100, 100, 0.2);
+}
+
+.vue-toast.hide {
+  animation: toast-fade-out cubic-bezier(0.22, 0.58, 0.12, 0.98) 1s forwards;
+}
+
+@keyframes toast-move-in-top {
+  from {
+    opacity: 0;
+    transform: translate(0, 5em);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes toast-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

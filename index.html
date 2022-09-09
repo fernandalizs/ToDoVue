@@ -24,15 +24,48 @@
   <body>
     <div id="app">
       <nav class="light-purple darken-2">
-        <div class="nav-wrapper"></div>
+        <div class="nav-wrapper">
+          <form>
+            <div class="input-field">
+              <input
+                id="search"
+                type="search"
+                required
+                v-model="taskFilter"
+                placeholder="Pesquisar tarefa..."
+              />
+              <label class="label-icon" for="search"
+                ><i class="fa-solid fa-magnifying-glass"></i
+              ></label>
+            </div>
+          </form>
+        </div>
       </nav>
+      <div v-if="toast.visible" :class="toast.style">
+        <h3>{{ toast.message }}</h3>
+      </div>
+      <div v-show="load" class="load center-align">
+        <div class="preloader-wrapper big active center-align">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
       ​
       <div class="container">
         <div class="section">
           <!--   Icon Section   -->
           <div class="row">
             <!-- card de tarefa que repete para cada item do array -->
-            <div v-for="tarefa in tasks" class="card horizontal">
+            <div v-for="tarefa in pesquisar" class="card horizontal">
               <div class="modalNovaTask">
                 <div class="conteudo">
                   <span
